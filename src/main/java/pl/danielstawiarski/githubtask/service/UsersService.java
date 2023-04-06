@@ -30,7 +30,7 @@ public class UsersService {
         return getUserFromGithubUser(githubUserEntity.getBody());
     }
 
-    public UserDTO getUserFromGithubUser(GithubUserDTO githubUser) {
+    private UserDTO getUserFromGithubUser(GithubUserDTO githubUser) {
         return UserDTO.builder()
                 .id(githubUser.getId())
                 .name(githubUser.getName())
