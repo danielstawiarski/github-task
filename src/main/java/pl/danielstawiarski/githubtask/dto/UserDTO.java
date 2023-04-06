@@ -1,15 +1,12 @@
 package pl.danielstawiarski.githubtask.dto;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.*;
+import lombok.Builder;
+import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@AllArgsConstructor
-@NoArgsConstructor
+@Data
 @Builder
-@Getter
-@Setter
 public class UserDTO {
     private String id;
     private String login;

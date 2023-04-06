@@ -1,15 +1,16 @@
 package pl.danielstawiarski.githubtask.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
 
 import java.time.LocalDateTime;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 @Getter
-@Setter
 public class GithubUserDTO {
     private String id;
     private String login;
