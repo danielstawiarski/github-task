@@ -10,12 +10,16 @@ import java.time.LocalDateTime;
 @Builder
 @Getter
 @Setter
-public class UserDTO {
+public class GithubUserDTO {
     private String id;
     private String login;
     private String name;
     private String type;
+    @JsonProperty("avatar_url")
     private String avatarUrl;
+    @JsonProperty("created_at")
     private LocalDateTime createdAt;
-    private int calculations;
+    @JsonProperty("public_repos")
+    private int publicRepos;
+    private int followers;
 }
