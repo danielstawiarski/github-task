@@ -4,9 +4,11 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 import pl.danielstawiarski.githubtask.dto.GithubUserDTO;
 import pl.danielstawiarski.githubtask.dto.UserDTO;
+import pl.danielstawiarski.githubtask.exception.GithubUserNotFoundException;
 
 @Service
 @AllArgsConstructor
@@ -18,8 +20,13 @@ public class UsersService {
 
     public UserDTO getUserDetails(@PathVariable String login) {
         loginCountService.incrementLoginRequestCount(login);
-        ResponseEntity<GithubUserDTO> githubUserEntity =
-                restTemplate.getForEntity(String.format(GITHUB_USER_DETAILS_URL, login), GithubUserDTO.class);
+        ResponseEntity<GithubUserDTO> githubUserEntity;
+        try {
+            githubUserEntity =
+                    restTemplate.getForEntity(String.format(GITHUB_USER_DETAILS_URL, login), GithubUserDTO.class);
+        } catch (HttpClientErrorException exception) {
+            throw new GithubUserNotFoundException(String.format("Cannot find github user with login %s", login));
+        }
         return getUserFromGithubUser(githubUserEntity.getBody());
     }
 

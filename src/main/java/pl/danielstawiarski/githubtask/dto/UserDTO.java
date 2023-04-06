@@ -17,5 +17,5 @@ public class UserDTO {
     private String type;
     private String avatarUrl;
     private LocalDateTime createdAt;
-    private int calculations;
+    private double calculations;
 }
